@@ -1,0 +1,301 @@
+/*フォントせってい*/
+@font-face {
+    font-family: yomogi;
+    font-display: swap;
+    src: url(/fonts/Yomogi-Regular.ttf);
+}
+@font-face {
+    font-family: mushin;
+    font-display: swap;
+    src: url(/fonts/mushin.otf);
+}
+/* メイン設定 */
+:root {
+    --bg: #0f1115;
+    --text: white;
+
+    --radius: 16px;
+    --blur: 20px;
+
+    --font: yomogi;
+    --widget-bg: rgba(40, 40, 40, 0.4);
+
+}
+body{
+    font-family: var(--font);
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 背景 */
+#background {
+    position: fixed;
+    inset: 0;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    z-index: -1;
+}
+
+/* ヘッダー */
+header{
+    align-items: center;
+}
+
+/* 検索バー */
+#searchForm {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+#searchInput {
+    width: min(600px, 80vw);
+    padding: 16px 24px;
+
+    border: none;
+    border-radius: 999px;
+
+    font-size: 18px;
+    font-family: yomogi;
+
+    color: white;
+    outline: none;
+
+    text-shadow: 0 1px 3px black;
+
+    
+}
+
+::placeholder {
+    color: rgba(255,255,255,0.8);
+}
+
+/* 時計 */
+.clock-widget {
+    position: fixed;
+
+    bottom: -30px;
+    right: -20px;
+
+    padding: 25px 40px;
+    border-radius: 20px;
+
+    color: white;
+    font-size: 38px;
+    font-weight: bold;
+}
+#clock {
+    letter-spacing: 3px;
+    transform: translateY(-15px);
+}
+
+/* ショトカ */
+#shortcuts {
+    position: fixed;
+
+    left: 50%;
+    bottom: 6px;
+    transform: translateX(-50%);
+    width: min(1320px, calc(100vw - 560px));
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 12px;
+}
+
+#shortcuts a {
+    padding: 10px 90px;
+
+    text-decoration: none;
+    font-size: 20px;
+
+    border-radius: 12px;
+
+    transition: .2s;
+
+    color: white;
+    text-shadow: 0 2px 5px black;
+}
+
+#shortcuts a:hover {
+    background: rgba(255,255,255,.3);
+    transform: translateY(-2px);
+}
+
+#shortcuts span{
+    margin-left: 4px;
+}
+
+#shortcuts[hidden] {
+    display: none;
+}
+
+/* 日付 */
+#date {
+    position: fixed;
+
+    bottom: 45px;
+    right: -10px;
+
+    padding: 10px 40px 15px;
+    border-radius: 20px;
+
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+    transform: translateY(-15px);
+}
+
+.widget {
+    background: var(--widget-bg);
+    backdrop-filter: blur(var(--blur));
+}
+
+/*サジェスト*/
+#suggestions {
+    position: fixed;
+    top: 115px;
+
+    width: min(600px, 80vw);
+
+    border: none;
+    border-radius: 32px;
+
+    font-size: 18px;
+    font-family: yomogi;
+
+    color: white;
+    outline: none;
+
+    text-shadow: 0 1px 3px black;
+
+    background: var(--widget-bg);
+    backdrop-filter: blur(var(--blur));
+}
+
+.suggestion {
+    padding: 16px 32px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.suggestion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 16px 8px 32px;
+    cursor: pointer;
+}
+
+.suggestion-label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.suggestion-add {
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    padding: 6px 12px;
+    color: white;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+}
+
+.suggestion-add:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.suggestion.selected {
+    background: rgba(255, 255, 255, 0.2);
+}
+/* Hidden widgets must stay hidden even when their layout uses flex. */
+[hidden] { display: none !important; }
+* { box-sizing: border-box; }
+body { margin: 0; background-color: var(--bg); }
+#background { background-image: url("/img/background.webp"); }
+#suggestions { z-index: 10; max-height: 50vh; overflow-y: auto; top: calc(5vh + 65px); }
+#suggestions:empty { display: none; }
+#searchInput, #suggestions { font-family: var(--font); }
+#shortcuts { max-height: 45vh; overflow-x: auto; overflow-y: hidden; flex-wrap: nowrap; justify-content: flex-start; padding: 8px 8px 0; }
+#shortcuts.is-scrollable { background: var(--widget-bg); border-radius: 16px; backdrop-filter: blur(var(--blur)); }
+/* Let the shared panel supply the tint once instead of stacking it per button. */
+#shortcuts.is-scrollable .widget { background: transparent; backdrop-filter: none; }
+#shortcuts.is-scrollable .widget:hover { background: rgba(255, 255, 255, .12); }
+#shortcuts::-webkit-scrollbar { height: 8px; }
+#shortcuts::-webkit-scrollbar-track { background: rgba(255, 255, 255, .07); border-radius: 999px; }
+#shortcuts::-webkit-scrollbar-thumb { min-width: 40px; border: 1px solid transparent; border-radius: 999px; background: rgba(255, 255, 255, .38); background-clip: padding-box; }
+#shortcuts::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, .65); }
+#shortcuts > .shortcut, #shortcuts > .shortcut-tail { flex: 0 0 auto; }
+#shortcuts > :first-child { margin-left: auto; }
+#shortcuts > :last-child { margin-right: auto; }
+#shortcuts a { overflow-wrap: anywhere; padding: 10px 28px; }
+:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* Neo keeps ChosuTab's background, search, lower shortcuts and right-hand clock. */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+button, input, select { font-family: var(--font); }
+.shortcut { position: relative; max-width: 100%; }
+#shortcuts .shortcut a { display: flex; align-items: center; gap: 4px; }
+#shortcuts .shortcut-name { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.edit-shortcut { position: absolute; top: -6px; right: -6px; width: 24px; height: 24px; display: grid; place-items: center; padding: 0; appearance: none; font-size: 0; line-height: 1; z-index: 1; border: 0; border-radius: 8px; background: #282828; color: white; opacity: 0; visibility: hidden; pointer-events: none; cursor: pointer; }
+/* Draw the dots independently of the selected Japanese font. */
+.edit-shortcut::before { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 12px; height: 4px; background: radial-gradient(circle, currentColor 1.5px, transparent 1.6px) 0 50% / 4px 4px repeat-x; }
+/* Mouse hover and keyboard focus select a shortcut; ordinary retained focus does not. */
+@media (any-hover: hover) {
+    .shortcut:hover .edit-shortcut { opacity: 1; visibility: visible; pointer-events: auto; }
+}
+html.keyboard-navigation .shortcut:focus-within .edit-shortcut { opacity: 1; visibility: visible; pointer-events: auto; }
+.add-shortcut { display: flex; align-items: center; justify-content: center; flex: 0 0 34px; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 10px; color: white; font-size: 20px; line-height: 1; cursor: pointer; transition: transform .2s ease, background-color .2s ease; }
+.shortcut-tail { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.shortcut-tail > .shortcut { min-width: 0; flex: 0 1 auto; }
+#shortcuts .add-shortcut span { margin-left: 0; }
+.add-shortcut:hover { background: rgba(255,255,255,.3); transform: translateY(-2px); }
+.add-shortcut:active { transform: translateY(0); }
+#pageStatus { position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%); margin: 0; max-width: 80vw; font-size: 12px; color: white; text-shadow: 0 1px 3px black; }
+#pageStatus:empty { display: none; }
+dialog { width: min(420px, calc(100% - 32px)); max-height: calc(100svh - 32px); padding: 24px; border: 1px solid #555; border-radius: 16px; background: #202124; color: white; }
+dialog::backdrop { background: rgba(0,0,0,.4); }
+.dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 20px; }
+.dialog-heading h1 { font-size: 18px; margin: 0; }
+.icon-button { border: 0; width: 30px; height: 30px; border-radius: 8px; color: white; background: #444; font-size: 22px; cursor: pointer; }
+dialog label { display: block; font-size: 14px; margin-bottom: 6px; }
+dialog input { width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #666; border-radius: 8px; color: white; background: #303134; font-size: 15px; }
+.error { color: #ffb3b3; font-size: 12px; margin: 0; }
+.error:empty { display: none; }
+.dialog-actions { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
+.dialog-actions > span { flex: 1; }
+.dialog-actions button { padding: 8px 10px; border: 0; border-radius: 8px; background: #45464a; color: white; cursor: pointer; }
+.dialog-actions .delete-button { background: #713737; }
+button:disabled { opacity: .5; cursor: wait; }
+@media (max-width: 1479px), (max-height: 600px) {
+    #shortcuts { width: calc(100vw - 320px); left: 15px; transform: none; bottom: 6px; max-height: 40vh; }
+    #shortcuts a { padding: 10px 18px; }
+}
+@media (max-width: 600px) {
+    #searchInput, #suggestions { width: 90vw; }
+    #searchInput { padding: 14px 18px; }
+    #shortcuts { bottom: 145px; left: 5vw; width: 90vw; max-height: 35vh; }
+    #date { font-size: 24px; }
+    .clock-widget { font-size: 32px; }
+    #pageStatus { bottom: 115px; width: 90vw; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

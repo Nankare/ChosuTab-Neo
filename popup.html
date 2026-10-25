@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChosuTab Neo - おぷしょん</title>
+  <link rel="stylesheet" href="css/popup.css">
+  <script src="js/shared.js" defer></script>
+  <script src="js/popup.js" defer></script>
+</head>
+<body>
+  <header><img src="icons/icon48.png" width="28" height="28" alt=""><h1>ChosuTab Neo - おぷしょん</h1></header>
+  <main>
+    <section>
+      <label for="searchEngine">検索エンジン</label>
+      <select id="searchEngine" disabled><option value="google">Google</option><option value="bing">Bing</option><option value="duckduckgo">DuckDuckGo</option><option value="yahoo">Yahoo! JAPAN</option></select>
+    </section>
+    <section>
+      <label for="font">フォント</label>
+      <select id="font" disabled><option value="yomogi">Yomogi</option><option value="mushin">Mushin（無心）</option></select>
+    </section>
+    <section>
+      <div class="section-heading"><label for="themeColor">テーマカラー</label><span id="colorValue">#282828</span></div>
+      <div class="color-row"><input id="themeColor" type="color" value="#282828" aria-label="テーマカラー" disabled><label for="widgetOpacity">透明度</label><input id="widgetOpacity" type="range" min="0" max="100" value="40" disabled></div>
+    </section>
+    <section>
+      <label for="backgroundFile">背景画像</label>
+      <div class="background-row"><div id="backgroundPreview" class="background-preview" aria-hidden="true"></div><div class="background-actions"><button id="chooseBackground" type="button" disabled>画像を選ぶ</button><button id="resetBackground" class="text-button" type="button" disabled>背景をリセット</button></div></div>
+      <input id="backgroundFile" type="file" accept="image/png,image/jpeg,image/webp,image/avif,image/gif,image/bmp" hidden>
+      <p class="hint">10MB以下の画像を軽量化して保存します。</p>
+    </section>
+    <p class="shortcut-hint">「＋」で追加・「…」で編集／削除</p>
+    <button id="clearSearchHistory" class="text-button" type="button">検索履歴を削除</button>
+    <details class="settings-management">
+      <summary>設定の管理</summary>
+      <div class="management-actions"><button id="exportSettings" type="button" disabled>エクスポート</button><button id="importSettings" type="button" disabled>インポート</button><button id="resetSettings" type="button" disabled>リセット</button></div>
+      <input id="settingsFile" type="file" accept=".json,application/json" hidden>
+    </details>
+    <p id="status" role="status" aria-live="polite">設定を読み込み中…</p>
+  </main>
+  <footer>変更は自動保存されます</footer>
+</body>
+</html>
