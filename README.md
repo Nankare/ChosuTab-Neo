@@ -84,5 +84,4 @@ Chrome上で、新規タブ・ショートカットの追加/編集/削除・検
 ## 使用フォントについて
 この拡張機能には、SIL Open Font License 1.1 に基づき「よもぎフォント（Yomogi）」が含まれています。
 詳細なライセンスと著作権表示については、フォントと同ディレクトリの `OFL.txt` をご確認ください。
-- 本家リポジトリ: https://github.com
-
+- 本家リポジトリ: https://github.com/satsuyako/YomogiFont/blob/ver3.00/OFL.txt
